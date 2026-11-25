@@ -148,9 +148,27 @@ details {
 summary {
   cursor: pointer;
   font-weight: 600;
-  list-style-position: outside;
+  list-style: none;
+  position: relative;
+  padding-left: 22px;
 }
 
+summary::-webkit-details-marker { display: none; }
+summary::marker { content: ""; }
+
+/* Small white arrow with space to its left, same as the home page toggle. */
+summary::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.45em;
+  border-style: solid;
+  border-width: 5px 0 5px 8px;
+  border-color: transparent transparent transparent var(--text);
+  transition: transform 0.2s ease;
+}
+
+details[open] > summary::before { transform: rotate(90deg); }
 details[open] summary { margin-bottom: 8px; }
 
 .cta {
