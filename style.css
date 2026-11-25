@@ -290,11 +290,8 @@ details.section-toggle {
 
 details.section-toggle > summary {
   list-style: none;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  column-gap: 12px;
-  padding: 14px 16px 14px 14px;
+  position: relative;
+  padding: 14px 16px 14px 44px;
   border-left: 3px solid var(--accent);
   border-radius: 0 12px 12px 0;
   background: var(--surface);
@@ -303,30 +300,31 @@ details.section-toggle > summary {
 }
 
 details.section-toggle > summary::-webkit-details-marker { display: none; }
-details.section-toggle > summary:hover { background: #10404e; }
-details.section-toggle > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+details.section-toggle > summary::marker { content: ""; }
 
-.toggle-title { font-size: 20px; font-weight: 700; grid-column: 1; }
-.toggle-sub { color: var(--text-muted); font-size: 14px; font-weight: 400; grid-column: 1; }
-
-.chevron {
-  grid-column: 2;
-  grid-row: 1 / span 2;
-  width: 24px;
-  height: 24px;
-  fill: none;
-  stroke: var(--accent);
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+/* Small white arrow, with space to its left; points right when closed, down when open. */
+details.section-toggle > summary::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 22px;
+  border-style: solid;
+  border-width: 6px 0 6px 10px;
+  border-color: transparent transparent transparent var(--text);
   transition: transform 0.2s ease;
 }
 
-details.section-toggle[open] .chevron { transform: rotate(180deg); }
+details.section-toggle[open] > summary::before { transform: rotate(90deg); }
+
+details.section-toggle > summary:hover { background: #10404e; }
+details.section-toggle > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 details.section-toggle[open] > summary { margin-bottom: 8px; }
+
+.toggle-title { display: block; font-size: 20px; font-weight: 700; }
+.toggle-sub { display: block; color: var(--text-muted); font-size: 14px; font-weight: 400; }
 
 .toggle-body { padding-top: 4px; }
 
 @media (prefers-reduced-motion: reduce) {
-  .chevron { transition: none; }
+  details.section-toggle > summary::before { transition: none; }
 }
