@@ -1,25 +1,25 @@
 /* Notch: privacy & support pages. Colors sampled from the app icon. */
 :root {
-  --bg-top: #0f5b6b;
-  --bg-mid: #0a4152;
-  --bg-bottom: #052738;
-  --card: rgba(255, 255, 255, 0.05);
-  --card-border: rgba(115, 217, 217, 0.18);
+  /* Matches NotchApp/App/Theme.swift ("Deep teal"). */
+  --bg: #06222b;
+  --surface: #0c3440;
+  --card-border: rgba(93, 202, 165, 0.20);
   --text: #f2f8f9;
   --text-muted: #a9c3c9;
-  --accent: #73d9d9;
-  --accent-soft: rgba(115, 217, 217, 0.12);
+  --accent: #5dcaa5;
+  --on-accent: #04342c;
+  --accent-soft: rgba(93, 202, 165, 0.12);
   color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
 
-html { background: var(--bg-bottom); }
+html { background: var(--bg); }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 45%, var(--bg-bottom) 100%) fixed;
+  background: var(--bg);
   color: var(--text);
   font: 17px/1.6 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -99,7 +99,7 @@ li { margin: 4px 0; }
 a { color: var(--accent); }
 
 .summary {
-  background: var(--card);
+  background: var(--surface);
   border: 1px solid var(--card-border);
   border-radius: 16px;
   padding: 18px 22px;
@@ -135,7 +135,7 @@ th, td {
 th { color: var(--accent); font-weight: 600; }
 
 details {
-  background: var(--card);
+  background: var(--surface);
   border: 1px solid var(--card-border);
   border-radius: 12px;
   padding: 12px 18px;
@@ -155,7 +155,7 @@ details[open] summary { margin-bottom: 8px; }
   padding: 12px 22px;
   border-radius: 12px;
   background: var(--accent);
-  color: var(--bg-bottom);
+  color: var(--on-accent);
   font-weight: 700;
   text-decoration: none;
   margin: 6px 0 4px;
@@ -170,7 +170,7 @@ details[open] summary { margin-bottom: 8px; }
 
 .cards a {
   display: block;
-  background: var(--card);
+  background: var(--surface);
   border: 1px solid var(--card-border);
   border-radius: 16px;
   padding: 20px;
@@ -197,3 +197,73 @@ footer a { color: var(--text-muted); }
   h1 { font-size: 28px; }
   th, td { padding: 8px 6px; }
 }
+
+ol.steps {
+  padding-left: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+ol.steps li {
+  counter-increment: step;
+  position: relative;
+  padding: 0 0 0 44px;
+  margin: 14px 0;
+}
+
+ol.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 700;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.studies {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+  margin: 12px 0 6px;
+}
+
+.study {
+  background: var(--surface);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 16px 18px;
+}
+
+.study > a {
+  font-weight: 700;
+  font-size: 17px;
+  text-decoration: none;
+}
+
+.study > a::after { content: " \2197"; font-size: 14px; }
+.study > a:hover { text-decoration: underline; }
+
+.study .cite {
+  display: block;
+  color: var(--text-muted);
+  font-size: 13px;
+  margin: 2px 0 8px;
+}
+
+.study p { margin: 0 0 8px; font-size: 15px; }
+
+.study .caveat {
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 0;
+}
+
+.footnote { color: var(--text-muted); font-size: 14px; }
